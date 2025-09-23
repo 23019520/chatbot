@@ -12,44 +12,59 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 75%, #f5576c 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: #ffffff;
             overflow: hidden;
         }
 
+        .app-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .chat-container {
-            position: relative;
             width: 100vw;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .chat-container.map-mode {
-            transform: translateX(-50%);
+        .app-container.split-view .chat-container {
+            width: 40vw;
+            transform: translateX(0);
         }
 
         .chat-panel {
             width: 90vw;
-            max-width: 500px;
+            max-width: 420px;
             height: 90vh;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(20, 20, 20, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .app-container.split-view .chat-panel {
+            width: 95%;
+            max-width: none;
         }
 
         .chat-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px 25px 25px;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 24px 20px;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -61,7 +76,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
             animation: shine 3s infinite;
         }
 
@@ -71,49 +86,49 @@
         }
 
         .bot-avatar {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            border-radius: 50%;
-            margin: 0 auto 15px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 12px;
+            margin: 0 auto 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
+            font-size: 28px;
             animation: bounce 2s ease-in-out infinite;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
         }
 
         .chat-header h2 {
-            color: white;
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 8px;
+            color: #ffffff;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 4px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .chat-header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1em;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
             font-weight: 400;
         }
 
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 25px;
-            background: rgba(248, 250, 255, 0.8);
+            padding: 20px;
+            background: rgba(15, 15, 15, 0.8);
         }
 
         .chat-messages::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
 
         .chat-messages::-webkit-scrollbar-track {
@@ -121,145 +136,154 @@
         }
 
         .chat-messages::-webkit-scrollbar-thumb {
-            background: rgba(102, 126, 234, 0.3);
-            border-radius: 10px;
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 2px;
         }
 
         .message {
-            margin-bottom: 20px;
-            animation: messageSlide 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-bottom: 16px;
+            animation: messageSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes messageSlide {
             from { 
                 opacity: 0; 
-                transform: translateY(20px) scale(0.95); 
+                transform: translateY(10px); 
             }
             to { 
                 opacity: 1; 
-                transform: translateY(0) scale(1); 
+                transform: translateY(0); 
             }
         }
 
         .bot-message {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-            padding: 18px 22px;
-            border-radius: 20px 20px 20px 8px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            background: rgba(40, 40, 40, 0.8);
+            padding: 16px 18px;
+            border-radius: 18px 18px 18px 6px;
             max-width: 85%;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-            color: #2d3748;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
 
         .user-message {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
-            padding: 18px 22px;
-            border-radius: 20px 20px 8px 20px;
+            padding: 16px 18px;
+            border-radius: 18px 18px 6px 18px;
             margin-left: auto;
             max-width: 85%;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
-            font-size: 0.95em;
+            font-size: 0.9em;
             line-height: 1.6;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
         }
 
         .chat-input-container {
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            background: rgba(20, 20, 20, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .chat-input {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
         }
 
         .chat-input input {
             flex: 1;
-            padding: 16px 22px;
-            border: 2px solid rgba(102, 126, 234, 0.2);
-            border-radius: 25px;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 22px;
             outline: none;
             font-size: 15px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(40, 40, 40, 0.6);
+            color: #ffffff;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            color: #2d3748;
         }
 
         .chat-input input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            border-color: #6366f1;
+            background: rgba(40, 40, 40, 0.8);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
             transform: translateY(-1px);
         }
 
+        .chat-input input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
         .send-btn {
-            padding: 16px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 22px;
             cursor: pointer;
             font-weight: 600;
             font-size: 14px;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            min-width: 70px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
         }
 
         .send-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .location-suggestions {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-            border-radius: 18px;
-            padding: 20px;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 15px;
+            padding: 18px;
             margin-top: 15px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .location-suggestions h4 {
-            color: #4a5568;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 12px;
-            font-size: 0.9em;
+            font-size: 0.85em;
             font-weight: 600;
         }
 
         .location-btn {
             display: inline-block;
-            padding: 10px 16px;
+            padding: 8px 14px;
             margin: 4px 6px 4px 0;
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            border: 1px solid rgba(102, 126, 234, 0.15);
-            border-radius: 20px;
+            background: rgba(60, 60, 60, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
             cursor: pointer;
-            font-size: 0.85em;
-            color: #4a5568;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.8);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             font-weight: 500;
         }
 
         .location-btn:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
         }
 
         .typing-indicator {
             display: none;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-            padding: 18px 22px;
-            border-radius: 20px 20px 20px 8px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            background: rgba(40, 40, 40, 0.8);
+            padding: 16px 18px;
+            border-radius: 18px 18px 18px 6px;
             max-width: 85%;
-            margin-bottom: 20px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .typing-dots {
@@ -269,10 +293,10 @@
         }
 
         .typing-dots span {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #8b5cf6;
             animation: typing 1.4s infinite ease-in-out;
         }
 
@@ -291,17 +315,16 @@
         }
 
         .map-container {
-            position: absolute;
-            right: -100vw;
-            top: 0;
-            width: 100vw;
+            width: 0;
             height: 100vh;
-            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-            background: #f7fafc;
+            background: #000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
         }
 
-        .map-container.show {
-            right: 0;
+        .app-container.split-view .map-container {
+            width: 60vw;
         }
 
         #map {
@@ -309,38 +332,44 @@
             height: 100%;
         }
 
-        .back-btn {
+        .map-controls {
             position: absolute;
-            top: 30px;
-            left: 30px;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            gap: 8px;
         }
 
-        .back-btn:hover {
+        .map-btn {
+            padding: 10px 16px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .map-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
         }
 
         .location-info {
             position: absolute;
-            bottom: 30px;
-            left: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.95);
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.95);
             backdrop-filter: blur(20px);
             padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             transform: translateY(100%);
             transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
@@ -350,14 +379,14 @@
         }
 
         .location-info h3 {
-            color: #2d3748;
+            color: #ffffff;
             margin-bottom: 10px;
             font-size: 1.3em;
             font-weight: 700;
         }
 
         .location-info p {
-            color: #4a5568;
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
             margin-bottom: 8px;
         }
@@ -367,7 +396,7 @@
             gap: 20px;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid rgba(102, 126, 234, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .route-detail {
@@ -382,169 +411,200 @@
 
         .route-detail .value {
             font-weight: 600;
-            color: #667eea;
+            color: #8b5cf6;
             display: block;
         }
 
         .route-detail .label {
             font-size: 0.8em;
-            color: #718096;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         @media (max-width: 768px) {
+            .app-container.split-view {
+                flex-direction: column;
+            }
+            
+            .app-container.split-view .chat-container {
+                width: 100vw;
+                height: 50vh;
+            }
+            
+            .app-container.split-view .map-container {
+                width: 100vw;
+                height: 50vh;
+            }
+            
             .chat-panel {
                 width: 95vw;
-                height: 95vh;
-            }
-            
-            .chat-header {
-                padding: 25px 20px 20px;
-            }
-            
-            .bot-avatar {
-                width: 60px;
-                height: 60px;
-                font-size: 30px;
-            }
-            
-            .chat-messages {
-                padding: 20px;
-            }
-            
-            .chat-input-container {
-                padding: 20px;
+                height: 95%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="chat-container" id="chatContainer">
-        <div class="chat-panel">
-            <div class="chat-header">
-                <div class="bot-avatar">🗺️</div>
-                <h2>Univen Navigator</h2>
-                <p>Your friendly campus guide</p>
-            </div>
-            
-            <div class="chat-messages" id="chatMessages">
-                <div class="message">
-                    <div class="bot-message">
-                        Hey there! 👋 I'm your University of Venda campus navigator. I'll help you find your way around campus with detailed directions and useful information.
-                        
-                        <div class="location-suggestions">
-                            <h4>🎯 Popular destinations:</h4>
-                            <button class="location-btn" onclick="quickLocation('library')">📚 Library</button>
-                            <button class="location-btn" onclick="quickLocation('cafeteria')">🍽️ Cafeteria</button>
-                            <button class="location-btn" onclick="quickLocation('dbsa residence')">🏠 DBSA Residence</button>
-                            <button class="location-btn" onclick="quickLocation('d block')">🎓 D Block</button>
-                            <button class="location-btn" onclick="quickLocation('sports hall')">⚽ Sports Hall</button>
-                            <button class="location-btn" onclick="quickLocation('main administration')">🏢 Main Admin</button>
+    <div class="app-container" id="appContainer">
+        <div class="chat-container">
+            <div class="chat-panel">
+                <div class="chat-header">
+                    <div class="bot-avatar">🧭</div>
+                    <h2>Univen Navigator</h2>
+                    <p>Smart campus navigation</p>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message">
+                        <div class="bot-message">
+                            Hey there! Ready to explore campus? I'm your University of Venda campus navigator. I'll help you find your way around campus with detailed directions and useful information.
+                            
+                            <div class="location-suggestions">
+                                <h4>Popular destinations:</h4>
+                                <button class="location-btn" onclick="quickLocation('library')">Library</button>
+                                <button class="location-btn" onclick="quickLocation('cafeteria')">Cafeteria</button>
+                                <button class="location-btn" onclick="quickLocation('dbsa residence')">DBSA Residence</button>
+                                <button class="location-btn" onclick="quickLocation('d block')">D Block</button>
+                                <button class="location-btn" onclick="quickLocation('sports hall')">Sports Hall</button>
+                                <button class="location-btn" onclick="quickLocation('main administration')">Main Admin</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="typing-indicator" id="typingIndicator">
-                <div class="typing-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="chat-input-container">
-                <div class="chat-input">
-                    <input type="text" id="userInput" placeholder="Where would you like to go?" onkeypress="handleKeyPress(event)">
-                    <button class="send-btn" onclick="sendMessage()">Send</button>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Where would you like to go?" onkeypress="handleKeyPress(event)">
+                        <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="map-container" id="mapContainer">
-        <button class="back-btn" onclick="hideMap()">← Back to Chat</button>
-        <div id="map"></div>
-        <div class="location-info" id="locationInfo">
-            <h3 id="locationName">Location Name</h3>
-            <p id="locationDescription">Location description will appear here</p>
-            <div class="route-info">
-                <div class="route-detail">
-                    <div class="icon">📏</div>
-                    <span class="value" id="routeDistance">-</span>
-                    <div class="label">Distance</div>
-                </div>
-                <div class="route-detail">
-                    <div class="icon">⏱️</div>
-                    <span class="value" id="routeTime">-</span>
-                    <div class="label">Walking Time</div>
+        <div class="map-container" id="mapContainer">
+            <div class="map-controls">
+                <button class="map-btn" onclick="hideMap()">← Back to Chat</button>
+                <button class="map-btn" onclick="centerOnUser()">My Location</button>
+            </div>
+            <div id="map"></div>
+            <div class="location-info" id="locationInfo">
+                <h3 id="locationName">Location Name</h3>
+                <p id="locationDescription">Location description will appear here</p>
+                <div class="route-info">
+                    <div class="route-detail">
+                        <div class="icon">📏</div>
+                        <span class="value" id="routeDistance">-</span>
+                        <div class="label">Distance</div>
+                    </div>
+                    <div class="route-detail">
+                        <div class="icon">⏱️</div>
+                        <span class="value" id="routeTime">-</span>
+                        <div class="label">Walking Time</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Campus locations for University of Venda
+        // Enhanced campus locations for University of Venda
         const campusLocations = {
             'library': { 
                 lat: -22.975632123316746, 
                 lng: 30.446721716047424, 
                 name: 'Main Library',
-                description: 'The main university library with study spaces, computer labs, and extensive academic resources. Open 24/7 during exam periods.',
-                aliases: ['lib', 'main library', 'university library']
+                description: 'University main library with study spaces, computer labs, and 24/7 access during exams. The heart of academic research on campus.',
+                aliases: ['lib', 'main library', 'university library', 'univen library']
             },
             'cafeteria': { 
                 lat: -22.975632123316746, 
                 lng: 30.446721716047424, 
                 name: 'Student Cafeteria',
-                description: 'Main dining facility serving breakfast, lunch, and dinner. Features various food stations and seating for over 500 students.',
-                aliases: ['dining hall', 'cafe', 'canteen', 'food court']
+                description: 'Main dining facility with multiple food stations and seating for 500+ students. Gets busy between 12-2pm, so plan accordingly!',
+                aliases: ['dining hall', 'cafe', 'canteen', 'food court', 'restaurant']
             },
             'dbsa residence': { 
                 lat: -22.978221904293864, 
                 lng: 30.450184015022643, 
                 name: 'DBSA Residence',
-                description: 'Student accommodation complex with both male and female sections. Includes study areas, recreation facilities, and dining hall.',
-                aliases: ['dbsa', 'dbsa res', 'mvelaphanda', 'student housing']
+                description: 'Student accommodation complex with study areas, recreation facilities, and dining hall. Home to hundreds of Univen students.',
+                aliases: ['dbsa', 'dbsa res', 'mvelaphanda', 'student housing', 'residence', 'dorm']
             },
             'd block': { 
                 lat: -22.977335257992035, 
                 lng: 30.44586071446359, 
                 name: 'D Block Lecture Hall',
-                description: 'Main lecture hall complex hosting large classes and university events. Features modern audio-visual equipment and tiered seating.',
-                aliases: ['d block lecture hall', 'lecture hall d', 'academic building d']
+                description: 'Main lecture hall complex with modern AV equipment and tiered seating. Host to major classes and university events.',
+                aliases: ['d block lecture hall', 'lecture hall d', 'academic building d', 'block d']
             },
             'sports hall': { 
                 lat: -22.975712868887097, 
                 lng: 30.448104222678666, 
                 name: 'Sports Hall',
-                description: 'Indoor sports facility with courts for basketball, volleyball, and badminton. Also houses the university gym and fitness center.',
-                aliases: ['gym', 'sports center', 'fitness center', 'basketball court']
+                description: 'Indoor sports facility with courts for basketball, volleyball, badminton, plus gym and fitness center.',
+                aliases: ['gym', 'sports center', 'fitness center', 'basketball court', 'sports complex']
             },
             'main administration': { 
                 lat: -22.97572303833234, 
                 lng: 30.44375292952129, 
                 name: 'Main Administration Building',
-                description: 'Central administrative hub housing student services, registrar, financial aid, and executive offices. First stop for most university business.',
-                aliases: ['admin', 'administration', 'main admin', 'student services', 'registrar']
+                description: 'Central hub for student services, registrar, financial aid, and administrative offices. Your first stop for university business.',
+                aliases: ['admin', 'administration', 'main admin', 'student services', 'registrar', 'admin building']
             },
             'auditorium': {
                 lat: -22.976971596159597,
                 lng: 30.447321408045646,
                 name: 'University Auditorium',
-                description: 'Main auditorium for graduations, conferences, and major university events. Seats up to 1,200 people with full multimedia capabilities.',
-                aliases: ['main auditorium', 'graduation hall', 'conference center']
+                description: 'Main auditorium for graduations, conferences, and major events. Seats up to 1,200 people with full multimedia capabilities.',
+                aliases: ['main auditorium', 'graduation hall', 'conference center', 'assembly hall']
             },
             'research center': {
                 lat: -22.975906782488387,
                 lng: 30.443160636586423,
                 name: 'Research Innovation Centre',
-                description: 'Hub for postgraduate studies and research activities. Houses laboratories, research facilities, and innovation programs.',
-                aliases: ['research centre', 'innovation center', 'postgrad center']
+                description: 'Hub for postgraduate studies, research activities, and innovation programs. The future of Univen research happens here.',
+                aliases: ['research centre', 'innovation center', 'postgrad center', 'research building']
             }
         };
 
+        // Response patterns for personality
+        const responsePatterns = {
+            greetings: [
+                "Ready to explore campus?",
+                "I'm excited to help you find your way around Univen!",
+                "Another adventure around campus awaits - where to?",
+                "I've been waiting to show you around our beautiful campus!"
+            ],
+            locationFound: [
+                "Perfect choice! {location} is one of my favorite spots to direct people to.",
+                "{location}! You've got good taste - let me get you there safely.",
+                "Great pick! {location} is definitely worth the walk.",
+                "{location} it is! I know exactly how to get you there.",
+                "Smart thinking! {location} is exactly where you need to be."
+            ],
+            encouragement: [
+                "Don't worry, I've got your back! Campus can be tricky at first.",
+                "No stress! Even seasoned students get turned around sometimes.",
+                "Happens to the best of us! I'm here to make sure you never wander aimlessly again.",
+                "Trust me, after a few guided trips, you'll know this campus like the back of your hand!"
+            ]
+        };
+
+        // Global variables
         const campusCenter = { lat: -22.977433817748597, lng: 30.442426628562664 };
         let map, directionsService, directionsRenderer, userLocation = null;
+        let isProcessing = false;
+
+        function getRandomResponse(category) {
+            const responses = responsePatterns[category];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
 
         function findLocation(query) {
             const searchQuery = query.toLowerCase().trim();
@@ -581,11 +641,8 @@
         }
 
         function showMap(location) {
-            const chatContainer = document.getElementById('chatContainer');
-            const mapContainer = document.getElementById('mapContainer');
-            
-            chatContainer.classList.add('map-mode');
-            mapContainer.classList.add('show');
+            const appContainer = document.getElementById('appContainer');
+            appContainer.classList.add('split-view');
             
             setTimeout(() => {
                 if (!map) {
@@ -596,13 +653,29 @@
         }
 
         function hideMap() {
-            const chatContainer = document.getElementById('chatContainer');
-            const mapContainer = document.getElementById('mapContainer');
+            const appContainer = document.getElementById('appContainer');
             const locationInfo = document.getElementById('locationInfo');
             
-            chatContainer.classList.remove('map-mode');
-            mapContainer.classList.remove('show');
+            appContainer.classList.remove('split-view');
             locationInfo.classList.remove('show');
+        }
+
+        function centerOnUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    if (map) {
+                        map.setCenter(userLocation);
+                        map.setZoom(18);
+                    }
+                    addMessage("Centered on your location!");
+                }, () => {
+                    addMessage("Couldn't access your location. Please enable location services.");
+                });
+            }
         }
 
         function initMap() {
@@ -620,7 +693,7 @@
                 map: map,
                 suppressMarkers: false,
                 polylineOptions: {
-                    strokeColor: '#667eea',
+                    strokeColor: '#6366f1',
                     strokeWeight: 4,
                     strokeOpacity: 0.8
                 }
@@ -635,7 +708,7 @@
                     icon: {
                         url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
                             <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="15" cy="15" r="12" fill="#667eea" stroke="white" stroke-width="3"/>
+                                <circle cx="15" cy="15" r="12" fill="#6366f1" stroke="white" stroke-width="3"/>
                                 <text x="15" y="19" text-anchor="middle" fill="white" font-size="12">📍</text>
                             </svg>
                         `),
@@ -693,45 +766,126 @@
                     setTimeout(() => {
                         document.getElementById('locationInfo').classList.add('show');
                     }, 500);
+                } else {
+                    addMessage(`Sorry, I couldn't calculate a route to ${destination.name}.`);
                 }
             });
         }
 
         function processMessage(message) {
+            const lowerMessage = message.toLowerCase().trim();
             const location = findLocation(message);
             
+            // Handle greetings
+            if (lowerMessage.match(/^(hi|hello|hey|greetings|good morning|good afternoon|good evening)$/)) {
+                const greeting = getRandomResponse('greetings');
+                addMessage(`${greeting}
+                    <div class="location-suggestions">
+                        <h4>Popular destinations right now:</h4>
+                        <button class="location-btn" onclick="quickLocation('cafeteria')">Grab some food</button>
+                        <button class="location-btn" onclick="quickLocation('library')">Study time</button>
+                        <button class="location-btn" onclick="quickLocation('main administration')">Handle business</button>
+                    </div>`);
+                return;
+            }
+
+            // Handle food-related queries
+            if (lowerMessage.includes('eat') || lowerMessage.includes('food') || lowerMessage.includes('hungry') || lowerMessage.includes('lunch') || lowerMessage.includes('dinner')) {
+                addMessage(`Hungry? I completely understand! Here are your food options on campus:
+                    <br><br><strong>Student Cafeteria</strong> - Your main dining spot with affordable meals and variety
+                    <br><strong>Various food vendors</strong> - Scattered around campus for quick snacks
+                    <br><br>Pro tip: The cafeteria gets busy between 12-2pm, so maybe grab lunch a bit earlier or later!
+                    
+                    <div class="location-suggestions">
+                        <h4>Food locations:</h4>
+                        <button class="location-btn" onclick="quickLocation('cafeteria')">Main Cafeteria</button>
+                    </div>`);
+                return;
+            }
+
+            // Handle study-related queries
+            if (lowerMessage.includes('study') || lowerMessage.includes('quiet') || lowerMessage.includes('research') || lowerMessage.includes('books')) {
+                addMessage(`Need a good study spot? I've got you covered! As someone who's seen countless study sessions, here are the best places:
+                    <br><br><strong>Main Library</strong> - The classic choice with everything you need
+                    <br><strong>Quiet corners in residence halls</strong> - If you prefer familiar surroundings
+                    <br><br>Insider tip: The library gets pretty packed during exam season, so claim your spot early!
+                    
+                    <div class="location-suggestions">
+                        <h4>Study destinations:</h4>
+                        <button class="location-btn" onclick="quickLocation('library')">Main Library</button>
+                        <button class="location-btn" onclick="quickLocation('dbsa residence')">DBSA Study Areas</button>
+                    </div>`);
+                return;
+            }
+
+            // Handle lost/confused queries
+            if (lowerMessage.includes('lost') || lowerMessage.includes('confused') || lowerMessage.includes('help me')) {
+                const encouragement = getRandomResponse('encouragement');
+                addMessage(`${encouragement}
+                    <br><br>Let's get you oriented! First things first - where are you trying to get to? Or if you're completely turned around, tell me what you can see around you and I'll help figure out where you are.
+                    <br><br>Remember: Main Administration is right in the center of campus - it's like our North Star!
+                    
+                    <div class="location-suggestions">
+                        <h4>Emergency navigation:</h4>
+                        <button class="location-btn" onclick="quickLocation('main administration')">Take me to Main Admin</button>
+                    </div>`);
+                return;
+            }
+
+            // Handle location requests
             if (location) {
                 showTyping();
                 setTimeout(() => {
                     hideTyping();
-                    addMessage(`🎯 Great! I found ${location.name}. Let me show you the route and provide more details.`);
+                    const locationResponse = getRandomResponse('locationFound').replace('{location}', location.name);
+                    addMessage(`${locationResponse}`);
                     
                     setTimeout(() => {
                         showMap(location);
                     }, 1000);
                 }, 1500);
+            } else if (lowerMessage.includes('help') || lowerMessage.includes('what can you do')) {
+                addMessage(`I'm your University of Venda campus navigator, and I'm here to make your campus experience smoother!
+                    <br><br><strong>What I can do for you:</strong>
+                    <br>🗺️ <strong>Navigate anywhere</strong> - Just say where you want to go
+                    <br>📍 <strong>Find facilities</strong> - Ask about any campus service
+                    <br>🎯 <strong>Give insider tips</strong> - Best times to visit, shortcuts, etc.
+                    <br>🤝 <strong>Understand your needs</strong> - Hungry? Studying? Lost? I get it!
+                    <br><br>Try being conversational! Say things like "I'm hungry, where can I eat?" or "I need somewhere quiet to study"
+                    
+                    <div class="location-suggestions">
+                        <h4>Popular requests:</h4>
+                        <button class="location-btn" onclick="addMessage('I need to eat something', true)">Find food</button>
+                        <button class="location-btn" onclick="addMessage('Where can I study?', true)">Study spots</button>
+                        <button class="location-btn" onclick="addMessage('I have business to handle', true)">Administrative tasks</button>
+                        <button class="location-btn" onclick="addMessage('I want to exercise', true)">Fitness facilities</button>
+                    </div>`);
             } else {
-                const lowerMessage = message.toLowerCase();
-                if (lowerMessage.includes('help') || lowerMessage.includes('what can you do')) {
-                    addMessage(`🤖 I'm here to help you navigate the University of Venda campus! Here's what I can do:
-                        <br><br>🗺️ <strong>Get Directions:</strong> Just tell me where you want to go
-                        <br>📍 <strong>Find Locations:</strong> Ask about any campus building or facility  
-                        <br>ℹ️ <strong>Location Info:</strong> Get details about services and amenities
-                        <br><br>Try saying things like "Take me to the library" or "Where is the cafeteria?"
+                // Handle partial matches or suggestions
+                const partialMatches = Object.entries(campusLocations).filter(([key, loc]) => {
+                    return lowerMessage.split(' ').some(word => 
+                        key.includes(word) || loc.name.toLowerCase().includes(word) ||
+                        (loc.aliases && loc.aliases.some(alias => alias.toLowerCase().includes(word)))
+                    );
+                });
+
+                if (partialMatches.length > 0) {
+                    addMessage(`Hmm, I think I know what you're looking for! Did you mean one of these places?
                         
                         <div class="location-suggestions">
-                            <h4>🎯 Try these locations:</h4>
-                            ${Object.values(campusLocations).map(loc => 
-                                `<button class="location-btn" onclick="quickLocation('${Object.keys(campusLocations).find(key => campusLocations[key] === loc)}')">${loc.name}</button>`
+                            <h4>Did you mean:</h4>
+                            ${partialMatches.map(([key, loc]) => 
+                                `<button class="location-btn" onclick="quickLocation('${key}')">${loc.name}</button>`
                             ).join('')}
                         </div>`);
                 } else {
-                    addMessage(`🤔 Hmm, I couldn't find that location on campus. Here are all the places I know about:
+                    addMessage(`I'm not quite sure what you're looking for, but don't worry - I know this campus inside and out! 
+                        <br><br>Try being more specific, or pick from these popular destinations. You can also ask me conversational questions like "Where can I grab lunch?" or "I need to study somewhere quiet."
                         
                         <div class="location-suggestions">
-                            <h4>📍 Available locations:</h4>
-                            ${Object.values(campusLocations).map(loc => 
-                                `<button class="location-btn" onclick="quickLocation('${Object.keys(campusLocations).find(key => campusLocations[key] === loc)}')">${loc.name}</button>`
+                            <h4>All campus locations:</h4>
+                            ${Object.entries(campusLocations).map(([key, loc]) => 
+                                `<button class="location-btn" onclick="quickLocation('${key}')">${loc.name}</button>`
                             ).join('')}
                         </div>`);
                 }
@@ -739,6 +893,8 @@
         }
 
         function sendMessage() {
+            if (isProcessing) return;
+            
             const input = document.getElementById('userInput');
             const message = input.value.trim();
             
@@ -753,6 +909,8 @@
         }
 
         function quickLocation(locationKey) {
+            if (isProcessing) return;
+            
             const location = campusLocations[locationKey];
             if (location) {
                 addMessage(`Directions to ${location.name}`, true);
@@ -763,22 +921,18 @@
         }
 
         function handleKeyPress(event) {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' && !isProcessing) {
+                event.preventDefault();
                 sendMessage();
             }
         }
 
-        // Initialize when page loads
-        window.onload = function() {
-            // Google Maps will be loaded when needed to improve initial load time
-            console.log("Univen Campus Navigator loaded successfully!");
-        };
-
+        // Load Google Maps API when showing map
         // Load Google Maps API when showing map
         function loadGoogleMaps() {
             if (!window.google) {
                 const script = document.createElement('script');
-                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCrTa1Z2dv1NN1Tq4VwhhWetcILPN7FIAI&callback=initMap&libraries=places';
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCrTa1Z2dv1NN1Tq4VwhhWetcILPN7FIAI&callback=initMapCallback&libraries=places';
                 script.async = true;
                 script.defer = true;
                 document.head.appendChild(script);
@@ -791,19 +945,34 @@
             if (!window.google) {
                 loadGoogleMaps();
                 // Wait for maps to load then show
-                const checkMaps = setInterval(() => {
-                    if (window.google && window.google.maps) {
-                        clearInterval(checkMaps);
-                        originalShowMap(location);
-                    }
-                }, 100);
+                window.initMapCallback = function() {
+                    initMap();
+                    originalShowMap(location);
+                };
             } else {
                 originalShowMap(location);
             }
         };
 
-        // Make initMap global for Google Maps callback
-        window.initMap = initMap;
+        // Initialize app
+        window.onload = function() {
+            console.log("Univen Campus Navigator loaded successfully!");
+            
+            // Auto-focus input
+            setTimeout(() => {
+                const input = document.getElementById('userInput');
+                if (input) {
+                    input.focus();
+                }
+            }, 1000);
+        };
+
+        // Make functions globally accessible
+        window.sendMessage = sendMessage;
+        window.quickLocation = quickLocation;
+        window.handleKeyPress = handleKeyPress;
+        window.hideMap = hideMap;
+        window.centerOnUser = centerOnUser;
     </script>
 </body>
 </html>
