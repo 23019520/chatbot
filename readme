@@ -1,0 +1,22 @@
+Univen Campus Navigator
+Univen Campus Navigator is a lightweight web-based assistant designed to help students easily navigate the University of Venda campus. The application provides an interactive chat-style interface where users can ask for directions, campus locations, and general navigation assistance in a clean, modern UI.
+Features
+Chat-based campus navigation interface
+Responsive split-view layout for enhanced usability
+Smooth animations and modern dark-themed design
+Scalable structure ready for backend or AI integration
+Mobile-friendly and browser-ready (no installation required)
+Technologies Used
+HTML5
+CSS3 (Flexbox, animations, responsive layout)
+JavaScript (for chat logic integration – optional extension)
+Usage
+Download or clone the project files.
+Open the index.html file in any modern web browser.
+Start interacting with the navigator through the chat interface.
+Future Improvements
+Integration with live campus maps
+AI-powered navigation responses
+Real-time building and route search
+Backend API connectivity for dynamic data
+Author: Dzivhani Unarine
